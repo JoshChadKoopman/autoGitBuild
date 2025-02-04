@@ -1,0 +1,32 @@
+name: AutoGitBuild
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build Docker Image
+        run: |
+          docker build -t mywebapp:latest .
+
+      - name: Push Docker Image (Example with GitHub Container Registry)
+        run: |
+          docker tag mywebapp:latest mywebapp:latest
+          docker push mywebapp:latest
+
+      - name: Trigger Jenkins Job
+        run: ./jenkins-trigger.sh
+        env:
+          JENKINS_URL: ${{ secrets.JENKINS_URL }}
+          JENKINS_TOKEN: ${{ secrets.JENKINS_TOKEN }}
