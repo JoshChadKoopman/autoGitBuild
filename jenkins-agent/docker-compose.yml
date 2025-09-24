@@ -1,0 +1,20 @@
+version: '3'
+services:
+  jenkins:
+    container_name: jenkins
+    image: jenkins/jenkins:lts
+    restart: unless-stopped
+    privileged: true
+    user: root
+    ports:
+      - "8085:8080"
+      - "50005:50000"
+    environment:
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
+      - COMPOSE_HTTP_TIMEOUT=300
+    volumes:
+      - jenkins-data:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock  # Optional: Enables Jenkins to run Docker commands
+
+volumes:
+  jenkins-data:
