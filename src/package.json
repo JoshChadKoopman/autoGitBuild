@@ -1,0 +1,22 @@
+{
+  "name": "autogitbuild-app",
+  "version": "1.0.0",
+  "description": "Tiny Express app for Jenkins AutoGitBuild",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "npx nodemon index.js",
+    "test": "echo \"No tests yet\" && exit 0"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT",
+  "private": true
+}
